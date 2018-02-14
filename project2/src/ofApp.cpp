@@ -8,7 +8,6 @@ void ofApp::setup(){
     o = 20;
     
     seed = 0;
-    
 }
 
 //--------------------------------------------------------------
@@ -27,10 +26,18 @@ void ofApp::draw(){
         drawClover( ofRandom(20, ofGetWindowWidth())-100, ofRandom(20, ofGetWindowHeight())-100, ofRandom(20, 30));
     }
     
-    //bee that chases the mouse
-    n = 0.90 * n + 0.1 * mouseX;
-    o = 0.90 * o + 0.1 * mouseY;
+    //option 1: bee that chases the mouse
+    //n = 0.90 * n + 0.1 * mouseX;
+    //o = 0.90 * o + 0.1 * mouseY;
+    
+    //option 2: bee that bounces across window
+    if(n >= ofGetWindowWidth()+40){
+        n = 0;
+    }
     drawBee(n, o);
+    n = n + 4;
+    o = ofMap(sin(ofGetElapsedTimef()), -1, 1, 500, 60);
+    
     
     //generate new clover patches
     if(ofGetMousePressed()) {
@@ -46,6 +53,12 @@ void ofApp::drawClover(int x, int y, int radius){
     ofDrawCircle(x - radius, y - radius/2, radius);
     ofDrawCircle(x, y + radius, radius);
     ofDrawCircle(x + radius, y - radius/2, radius);
+    
+    
+    // xorig,yorig,radius and angle
+    // x = xorig + radius * cos(angle)
+    // y = yorig + radius * sin(angle);
+    
     
     //lil clover friends
     if(radius > 3) {
