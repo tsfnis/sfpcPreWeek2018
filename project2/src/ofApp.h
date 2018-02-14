@@ -25,5 +25,6 @@ class ofApp : public ofBaseApp{
         void drawBee(float x, float y);
         float n;
         float o;
+        float seed;
     
 };

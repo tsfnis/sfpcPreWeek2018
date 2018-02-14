@@ -6,6 +6,9 @@ void ofApp::setup(){
     ofSetFrameRate(30);
     n = 20;
     o = 20;
+    
+    seed = 0;
+    
 }
 
 //--------------------------------------------------------------
@@ -17,7 +20,7 @@ void ofApp::update(){
 void ofApp::draw(){
     
     ofBackground(20, 107, 13);
-    ofSeedRandom(0);
+    ofSeedRandom(seed);
     
     //how many clover patches do you want
     for(int i = 1; i< 10; i++){
@@ -28,6 +31,11 @@ void ofApp::draw(){
     n = 0.90 * n + 0.1 * mouseX;
     o = 0.90 * o + 0.1 * mouseY;
     drawBee(n, o);
+    
+    //generate new clover patches
+    if(ofGetMousePressed()) {
+        seed = ofGetElapsedTimef();
+    }
     
 }
 //--------------------------------------------------------------
@@ -52,8 +60,38 @@ void ofApp::drawClover(int x, int y, int radius){
 //--------------------------------------------------------------
 void ofApp::drawBee(float x, float y){
     
+    //back bee wing
+    ofSetColor(0);
+    ofNoFill();
+    ofDrawCircle(x+8, y-25, 15);
+    ofSetColor(255,255,255);
+    ofFill();
+    ofDrawCircle(x+8, y-25, 15);
+    
+    //bee body
     ofSetColor(242, 209, 23);
     ofDrawCircle(x, y, 25);
+    
+    //bee eye, stinger, and stripe (all black)
+    ofSetColor(0);
+    ofDrawCircle(x+8, y-4, 3);
+    
+    ofDrawTriangle(x-23, y-8, x-23, y+8, x-50, y);
+    
+    ofDrawEllipse(x-5, y, 5, 48);
+    ofDrawEllipse(x-15, y, 5, 40);
+    
+    //front bee wing
+    ofSetColor(0);
+    ofNoFill();
+    ofDrawCircle(x-15, y-25, 15);
+    ofSetColor(255,255,255);
+    ofFill();
+    ofDrawCircle(x-15, y-25, 15);
+    
+  
+    
+
     
 }
 //--------------------------------------------------------------
