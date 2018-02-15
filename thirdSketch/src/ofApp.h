@@ -22,7 +22,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
         
-        float blues[20];
+        float blues[500];
+        float speeds[500];
     
     
 		
