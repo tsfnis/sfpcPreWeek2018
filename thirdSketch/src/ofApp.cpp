@@ -3,7 +3,10 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-
+    for(int i = 0; i < 20; i++){
+        blues[i] = (ofRandom(10,255));
+    }
+    
 }
 
 //--------------------------------------------------------------
@@ -15,27 +18,42 @@ void ofApp::update(){
 void ofApp::draw(){
     
     ofBackground(0);
-    ofSetColor(0, 0, 255);
+    //ofSetColor(0, 0, 255);
     
-    for(int i = 0; i < 20; i++){
-       radius[i] = ofMap(sin(ofGetElapsedTimef()), -1, 1, 1, 10);
-        cout << radius[i] << endl;
-    }
+    //three flavors of radius cycling
+    float rad1 = ofMap(sin(ofGetElapsedTimef()), -1, 1, 1, 10);
+    float rad2 = ofMap(cos(ofGetElapsedTimef()), -1, 1, 1, 10);
+    float rad3 = ofMap(-sin(ofGetElapsedTimef()), -1, 1, 1, 10);
     
-    
+    //counter for the blues :/
+    int i = 0;
     
     for(int x = 10; x<1000; x+=25) {
+        
         for(int y = 0; y<1000; y+=25) {
-            for(int i = 0; i < 20; i++){
+            
                 if(x % 4 == 0 || y % 9 == 0) {
                     //skip that circle
                 } else {
-                    ofDrawCircle(x, y, radius[i]);
+                    ofSetColor(0, 0, blues[i]);
+                    if(x%3 == 0) {
+                    ofDrawCircle(x, y, rad3);
+                    } else if ( y%3 == 0) {
+                    ofDrawCircle(x, y, rad2);
+                    } else {
+                    ofDrawCircle(x, y, rad1);
+                    }
+                    if(i > 20) {
+                        i = 0;
+                    } else {
+                        i++;
+                    }
+                    
                 }
             }
         }
     }
-}
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
