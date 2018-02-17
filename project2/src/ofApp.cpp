@@ -27,17 +27,18 @@ void ofApp::draw(){
     }
     
     //option 1: bee that chases the mouse
-    //n = 0.90 * n + 0.1 * mouseX;
-    //o = 0.90 * o + 0.1 * mouseY;
+    n = 0.90 * n + 0.1 * mouseX;
+    o = 0.90 * o + 0.1 * mouseY;
+    drawBee(n, o);
     
     //option 2: bee that bounces across window
-    if(n >= ofGetWindowWidth()+40){
-        n = 0;
-    }
-    drawBee(n, o);
-    n = n + 4;
-    o = ofMap(sin(ofGetElapsedTimef()), -1, 1, 500, 60);
-    
+//    if(n >= ofGetWindowWidth()+40){
+//        n = 0;
+//    }
+//    drawBee(n, o);
+//    n = n + 4;
+//    o = ofMap(sin(ofGetElapsedTimef()), -1, 1, 500, 60);
+//
     
     //generate new clover patches
     if(ofGetMousePressed()) {
